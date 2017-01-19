@@ -16,3 +16,16 @@ def above_minimum(bets, mini):
 
 print(above_minimum([1, 2, 4, 5], 2))
 # test OK
+
+
+def spin_the_wheel(bets):
+    draw = random.randint(0, 36)
+    wins = [bet == draw for bet in bets]
+    if not any(wins):
+        print("No player won")
+    print(draw)
+    return wins
+
+print(spin_the_wheel([2, 8, 9, 26, 14]))
+print(spin_the_wheel([2, 8, 9, 26, 14]))
+# Tests OK
