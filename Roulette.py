@@ -15,6 +15,7 @@ class Table(object):
         above = [bet >= self.mini for bet in bets]
         return above
 
+
 class Roulette(Table):
     """Defines a roulette table"""
     def __init__(self, mini):
@@ -24,9 +25,12 @@ class Roulette(Table):
         """Spins the wheel and tells which players won (not accounting for minimum bet)"""
         draw = random.randint(0, 36)
         wins = [bet == draw for bet in bet_on]
+        print("Ball lands on " + str(draw))
         if not any(wins):
             print("No player won")
-        print("Ball lands on " + str(draw))
+        else:
+            players = [i for i, x in enumerate(wins) if x]
+            print("Players " + str(players) + " won")
         return wins
 
     def simulate_game(self, bets, bet_on):
