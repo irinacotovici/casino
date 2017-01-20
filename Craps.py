@@ -28,7 +28,7 @@ class Craps(Roulette.Table):
 
     def calculate_prize(self, bet_on, expected_return=0.9):
         """Calculates the prize for a correct bet based on the sum of two dices and a expected return of 90%"""
-        prob = 6 - abs(bet_on - 7)/6
+        prob = (6 - abs(bet_on - 7))/36
         prize = expected_return/prob
         return prize
 

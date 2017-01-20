@@ -1,9 +1,6 @@
 """Defines functions related to the roulette game"""
 import random
 
-# This is used to fix the random number generator so we can test the output
-random.seed(3456)
-
 
 class Table(object):
     """Defines a table"""
