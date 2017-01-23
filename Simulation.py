@@ -1,5 +1,4 @@
-import Roulette
-import Craps
+import Tables
 from random import randint
 import random
 # from collections import Counter
@@ -13,7 +12,7 @@ random.seed(3456)
 
 amounts1 = [10, 85, 120, 65, 150, 122]
 bets1 = [10, 24, 36, 0, 11, 24]
-table1 = Roulette.Roulette(100)
+table1 = Tables.Roulette(100)
 print(table1.simulate_game(amounts1, bets1))
 print(table1.simulate_game(amounts1, bets1))
 
@@ -21,7 +20,7 @@ print(table1.simulate_game(amounts1, bets1))
 
 amounts2 = [10, 85, 120, 65, 150, 122]
 bets2 = [10, 12, 6, 2, 11, 5]
-table2 = Craps.Craps(100)
+table2 = Tables.Craps(100)
 print(table2.simulate_game(amounts2, bets2))
 print(table2.simulate_game(amounts2, bets2))
 
