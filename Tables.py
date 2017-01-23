@@ -15,8 +15,11 @@ class Table(object):
 
 class Roulette(Table):
     """Defines a roulette table"""
-    def __init__(self, mini):
-        Table.__init__(self, mini)
+    # def __init__(self, mini):
+    #     Table.__init__(self, mini)
+
+    def set_minimum(self):
+        self.mini = random.choice([50, 100, 200])
 
     def spin_the_wheel(self, bet_on):
         """Spins the wheel and tells which players won (not accounting for minimum bet)"""
@@ -41,8 +44,11 @@ class Roulette(Table):
 
 class Craps(Table):
     """Defines a roulette table"""
-    def __init__(self, mini):
-        Table.__init__(self, mini)
+    # def __init__(self, mini):
+    #     Table.__init__(self, mini)
+
+    def set_minimum(self):
+        self.mini = random.choice([0, 25, 50])
 
     def dices(self, n=2):
         """Rolls n dices and gives their sum"""
