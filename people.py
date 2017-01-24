@@ -28,6 +28,7 @@ class Croupiers(Employees):
 
      def total_wage(self, profit): #profit (per table) should be defined in "tables"
          self.total_wage += self.profit * 0.005
+         return self.total_wage
 
 ###########################
 class Barmen(Employees):
@@ -39,6 +40,7 @@ class Barmen(Employees):
          self.total_wage += customer.tips
         else :
          self.total_wage += 0
+        return self.total_wage
 
 #############################
 #############################
@@ -60,6 +62,7 @@ class Customers(object):
           self.drinks = random.choice([20,40])
         else:
           self.drinks = 0
+        return self.drinks
 
     def tips(self,current_budget):
         if current_budget >= 60:
@@ -91,9 +94,10 @@ class one_time(Customers):
 class bachelor(Customers):
     def initial_budget(self):
         self.initial_budget = randint(200, 500)
-
+        return self.initial_budget
     def total_budget(self,promotion):
         self.initial_budget += promotion
 
     def bet(self, initial_budget):
         self.bet = randint(0, initial_budget)
+        return self.bet
