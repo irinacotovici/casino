@@ -14,7 +14,6 @@
 #         self.minbet = random.choice([0,25,50])
 
 ##########################
-
 import Tables
 import random
 from random import randint
@@ -34,12 +33,13 @@ class Croupiers(Employees):
 
 ###########################
 class Barmen(Employees):
-    def __init__(self, fixed_wage):
+    def __init__(self, fixed_wage,customers):
           self.total_wage = fixed_wage
+          self.customers = customers
 
-    def tips(self, customer):
-        if customer.current_budget >= 60 :
-         self.total_wage += customer.tips
+    def tips(self, customers):
+        if customers.current_budget >= 60 :
+         self.total_wage += self.customers.tips
         else :
          self.total_wage += 0
         return self.total_wage
@@ -65,21 +65,23 @@ class Customers(object):
         else:
           self.drinks = 0
         return self.drinks
+        self.current_budget -= self.drinks
 
     def tips(self,current_budget):
-        if current_budget >= 60:
-          self.tips = randint(0,20)
-        else :
-            self.tips = 0
-###########################
+         if current_budget >= 40:
+             self.tips = randint(0,20)
+         else :
+             self.tips = 0
+             self.current_budget -= self.tips
 
+###########################
 class Returning(Customers):
     def initial_budget(self):
         self.initial_budget = randint(100,300)
         return self.initial_budget
 
     def bet(self, minbet, initial_budget):
-        if initial_budget >= minbet :
+        if initial_budget >= Tables.mini :
             return minbet
         else:
             return 0

@@ -4,8 +4,10 @@ import random
 
 class Table(object):
     """Defines a table"""
-    def __init__(self, mini):
+    def __init__(self, mini, croupier, customers):
         self.mini = mini
+        self.croupier = croupier
+        self.croupier = customers
 
     def above_minimum(self, bets):
         """ Checks if the bets are above the minimum of the table """
