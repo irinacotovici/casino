@@ -46,7 +46,7 @@ class Barmen(Employees):
     def tips(self, customer):
         if customer.current_budget >= 60 :
             self.total_wage += customer.tips
-        else :
+        else:
             self.total_wage += 0
         return self.total_wage
 

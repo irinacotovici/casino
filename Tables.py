@@ -7,7 +7,7 @@ class Table(object):
     def __init__(self, mini, croupier, customers):
         self.mini = mini
         self.croupier = croupier
-        self.croupier = customers
+        self.customers = customers
 
     def above_minimum(self, bets):
         """ Checks if the bets are above the minimum of the table """
