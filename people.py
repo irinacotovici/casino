@@ -14,6 +14,8 @@
 #         self.minbet = random.choice([0,25,50])
 
 ##########################
+
+import Tables
 import random
 from random import randint
 ##########################
@@ -27,7 +29,7 @@ class Croupiers(Employees):
             self.total_wage = fixed_wage
 
      def total_wage(self, profit): #profit (per table) should be defined in "tables"
-         self.total_wage += self.profit * 0.005
+         self.total_wage += Tables.profit * 0.005
          return self.total_wage
 
 ###########################
@@ -49,7 +51,7 @@ class Customers(object):
     def __init__(self, initial_budget, bet, current_budget, drinks, tips):
           self.initial_budget = initial_budget
           self.bet = bet
-          self.gain = gain #should be defined in tables
+          self.value_won = Tables.value_won
           self.current_budget = current_budget
           self.drinks = drinks
           self.tips = tips
