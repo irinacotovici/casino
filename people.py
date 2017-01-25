@@ -1,6 +1,5 @@
 
 ##########################
-import Tables
 import random
 from random import randint
 ##########################
@@ -10,11 +9,10 @@ class Employees(object):
     def __init__(self, fixed_wage):
         self.total_wage = fixed_wage
 
-class Croupiers(Employees):
-        def total_wage(self, fixed_wage):
-            self.total_wage = fixed_wage
 
-        def total_wage(self, profit):
+class Croupiers(Employees):
+        def total_wage(self, fixed_wage, profit):
+            self.total_wage = fixed_wage
             self.total_wage += profit * 0.005
             return self.total_wage
 
@@ -23,19 +21,19 @@ class Croupiers(Employees):
 
 class Barmen(Employees):
 
-    def __init__(self, fixed_wage,drinks, tips):
-        self.total_wage = fixed_wage
-        self.drinks = drinks
-        self.tips = tips
+    # def __init__(self, fixed_wage, drinks, tips):
+    #     self.total_wage = fixed_wage
+    #     self.drinks = drinks
+    #     self.tips = tips
 
     def adjusted_wage(self, tips):
         self.total_wage += tips
 
-    def drinks_served(self, drinks):
-        self.drinks += drinks
-
-    def tips_received(self, tips):
-        self.tips += tips
+    # def drinks_served(self, drinks):
+    #     self.drinks += drinks
+    #
+    # def tips_received(self, tips):
+    #     self.tips += tips
 
 #############################
 #############################
@@ -80,7 +78,7 @@ class Returning(Customers):
         return self.current_budget
 
     def bet(self, min_bet, current_budget):
-        if current_budget >= Tables.mini:
+        if current_budget >= min_bet:
             return min_bet
         else:
             return 0
@@ -88,7 +86,7 @@ class Returning(Customers):
 ############################
 
 
-class one_time (Customers):
+class OneTime (Customers):
     def initial_budget(self):
         self.current_budget = randint(200, 300)
 
