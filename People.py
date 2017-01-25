@@ -1,25 +1,8 @@
-# # # EXCERCISE 5
-# import random
-#
-# #########################
-# class Tables(object):
-#
-# class Roulette(Tables):
-#
-#     def minbet(self):
-#         self.minbet = random.choice([50,100,200])
-#
-# class Craps(Tables):
-#     def minbet(self):
-#         self.minbet = random.choice([0,25,50])
 
 ##########################
-import Tables
 import random
 from random import randint
-##########################
-##########################
-##########################
+###########################
 
 
 class Employees(object):
@@ -28,22 +11,29 @@ class Employees(object):
 
 
 class Croupiers(Employees):
-
-    def total_wage(self, profit):  # profit (per table) should be defined in "tables"
-        self.total_wage += profit * 0.005
-        return self.total_wage
+        def total_wage(self, fixed_wage, profit):
+            self.total_wage = fixed_wage
+            self.total_wage += profit * 0.005
+            return self.total_wage
 
 ###########################
 
 
 class Barmen(Employees):
 
-    def tips(self, customer):
-        if customer.current_budget >= 60 :
-            self.total_wage += customer.tips
-        else:
-            self.total_wage += 0
-        return self.total_wage
+    # def __init__(self, fixed_wage, drinks, tips):
+    #     self.total_wage = fixed_wage
+    #     self.drinks = drinks
+    #     self.tips = tips
+
+    def adjusted_wage(self, tips):
+        self.total_wage += tips
+
+    # def drinks_served(self, drinks):
+    #     self.drinks += drinks
+    #
+    # def tips_received(self, tips):
+    #     self.tips += tips
 
 #############################
 #############################
@@ -51,66 +41,72 @@ class Barmen(Employees):
 
 
 class Customers(object):
-    def __init__(self, initial_budget, bet, current_budget, drinks, tips):
-        self.initial_budget = initial_budget
+    def __init__(self, bet, current_budget, drinks, tips, gain, barman):
         self.bet = bet
-        # self.value_won = Tables.value_won
+        self.gain = gain
         self.current_budget = current_budget
         self.drinks = drinks
         self.tips = tips
+        self.barman = barman
 
-    def current_budget(self, initial_budget, bet, gain):
-        self.current_budget = initial_budget - bet + gain
+    def current_budget(self, bet, gain):
+        self.current_budget -= bet
+        self.current_budget += gain
 
     def drinks(self, current_budget):
-        if current_budget >= 60 :
-            self.drinks = random.choice([20,40])
+        if current_budget >= 60:
+            self.drinks = random.choice([20, 40])
         else:
             self.drinks = 0
-        return self.drinks
+
         self.current_budget -= self.drinks
 
     def tips(self, current_budget):
-
-        if current_budget >= 60:
-            self.tips = randint(0,20)
+        if current_budget >= 20:
+            self.tips = randint(0, 20)
         else:
             self.tips = 0
+
+        self.current_budget -= self.tips
+
 ###########################
 
 
 class Returning(Customers):
+    def initial_budget(self):
+        self.current_budget = randint(100, 300)
+        return self.current_budget
     def set_initial_budget(self):
         self.initial_budget = randint(100,300)
         return self.initial_budget
 
-    def bet(self, minbet, initial_budget):
-        if initial_budget >= Tables.mini :
-            return minbet
+    def bet(self, min_bet, current_budget):
+        if current_budget >= min_bet:
+            return min_bet
         else:
             return 0
 
 ############################
 
 
-class OneTime(Customers):
-    def set_initial_budget(self):
-        self.initial_budget = randint(200, 300)
+class OneTime (Customers):
+    def initial_budget(self):
+        self.current_budget = randint(200, 300)
 
-    def bet(self, initial_budget):
-        self.bet = randint(0, initial_budget/3)
+    def bet(self, current_budget):
+        self.bet = randint(0, current_budget/3)
 
 ############################
 
 
 class Bachelor(Customers):
-    def set_initial_budget(self):
-        self.initial_budget = randint(200, 500)
-        return self.initial_budget
+    def initial_budget(self):
+        self.current_budget = randint(200, 500)
+        return self.current_budget
 
-    def total_budget(self,promotion):
-        self.initial_budget += promotion
+    def total_budget(self, promotion):
+        self.current_budget += promotion
 
-    def bet(self, initial_budget):
-        self.bet = randint(0, initial_budget)
+    def bet(self, current_budget):
+        self.bet = randint(0, current_budget)
         return self.bet
