@@ -24,24 +24,19 @@ from random import randint
 
 class Employees(object):
     def __init__(self, fixed_wage):
-        self.fixed_wage = fixed_wage
+        self.total_wage = fixed_wage
 
 
 class Croupiers(Employees):
-    def __init__(self, fixed_wage):
-        self.total_wage = fixed_wage
 
-    def total_wage(self, profit): #profit (per table) should be defined in "tables"
-        self.total_wage += Tables.profit * 0.005
+    def total_wage(self, profit):  # profit (per table) should be defined in "tables"
+        self.total_wage += profit * 0.005
         return self.total_wage
 
 ###########################
 
 
 class Barmen(Employees):
-
-    def __init__(self, fixed_wage):
-        self.total_wage = fixed_wage
 
     def tips(self, customer):
         if customer.current_budget >= 60 :
@@ -75,7 +70,7 @@ class Customers(object):
         return self.drinks
         self.current_budget -= self.drinks
 
-    def tips(self,current_budget):
+    def tips(self, current_budget):
 
         if current_budget >= 60:
             self.tips = randint(0,20)
