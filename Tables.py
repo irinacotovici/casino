@@ -4,21 +4,43 @@ import random
 
 class Table(object):
     """Defines a table"""
-    def __init__(self, mini, croupier, customers):
+    bet_range = range(0)
+
+    def __init__(self, mini, croupier, customers, profit=0):
         self.mini = mini
         self.croupier = croupier
-        self.croupier = customers
+        self.customers = customers
+        self.profit = profit
 
     def above_minimum(self, bets):
         """ Checks if the bets are above the minimum of the table """
         above = [bet >= self.mini for bet in bets]
         return above
 
+    def call_bets(self):
+        """Calls for bets from the players"""
+        [x.bet(self.mini, self.bet_range) for x in self.customers]
+
+    def simulate_game(self, bets, bet_on):
+        """Placeholder for subclasses methods"""
+        print("No game on this table")
+
+    def simulate_round(self):
+        """Only function needed to be called for a round.
+        Updates table's profit, croupier's commission, customers bets and budgets"""
+        self.call_bets()
+        bets = [x.bet for x in self.customers]  # Extracts a list of wages from the customers
+        bet_on = [random.randint(self.bet_range[0], self.bet_range[1]) for _ in self.customers]  # randomly chooses bets
+        game_result = self.simulate_game(bets, bet_on)
+        self.croupier.commission(game_result[1])  # Awards the croupier his commission
+        self.profit += game_result[1] * 0.995  # After the croupier's commission
+        for x, y in zip(self.customers, game_result[0]):  # Awards each customer with the prize won
+            x.current_budget += y
+
 
 class Roulette(Table):
     """Defines a roulette table"""
-    # def __init__(self, mini):
-    #     Table.__init__(self, mini)
+    bet_range = range(1, 36)  # The 0 is always a win for the house in the roulette
 
     def set_minimum(self):
         self.mini = random.choice([50, 100, 200])
@@ -46,8 +68,7 @@ class Roulette(Table):
 
 class Craps(Table):
     """Defines a roulette table"""
-    # def __init__(self, mini):
-    #     Table.__init__(self, mini)
+    bet_range = range(2, 12)
 
     def set_minimum(self):
         self.mini = random.choice([0, 25, 50])

@@ -76,6 +76,9 @@ class Returning(Customers):
     def initial_budget(self):
         self.current_budget = randint(100, 300)
         return self.current_budget
+    def set_initial_budget(self):
+        self.initial_budget = randint(100,300)
+        return self.initial_budget
 
     def bet(self, min_bet, current_budget):
         if current_budget >= min_bet:
