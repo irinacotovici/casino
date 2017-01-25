@@ -59,7 +59,7 @@ class Customers(object):
     def __init__(self, initial_budget, bet, current_budget, drinks, tips):
         self.initial_budget = initial_budget
         self.bet = bet
-        self.value_won = Tables.value_won
+        # self.value_won = Tables.value_won
         self.current_budget = current_budget
         self.drinks = drinks
         self.tips = tips
@@ -85,7 +85,7 @@ class Customers(object):
 
 
 class Returning(Customers):
-    def initial_budget(self):
+    def set_initial_budget(self):
         self.initial_budget = randint(100,300)
         return self.initial_budget
 
@@ -98,8 +98,8 @@ class Returning(Customers):
 ############################
 
 
-class one_time(Customers):
-    def initial_budget(self):
+class OneTime(Customers):
+    def set_initial_budget(self):
         self.initial_budget = randint(200, 300)
 
     def bet(self, initial_budget):
@@ -109,7 +109,7 @@ class one_time(Customers):
 
 
 class Bachelor(Customers):
-    def initial_budget(self):
+    def set_initial_budget(self):
         self.initial_budget = randint(200, 500)
         return self.initial_budget
 
