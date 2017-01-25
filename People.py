@@ -11,8 +11,7 @@ class Employees(object):
 
 
 class Croupiers(Employees):
-        def total_wage(self, fixed_wage, profit):
-            self.total_wage = fixed_wage
+        def total_wage(self, profit):
             self.total_wage += profit * 0.005
             return self.total_wage
 
@@ -21,19 +20,9 @@ class Croupiers(Employees):
 
 class Barmen(Employees):
 
-    # def __init__(self, fixed_wage, drinks, tips):
-    #     self.total_wage = fixed_wage
-    #     self.drinks = drinks
-    #     self.tips = tips
-
     def adjusted_wage(self, tips):
         self.total_wage += tips
 
-    # def drinks_served(self, drinks):
-    #     self.drinks += drinks
-    #
-    # def tips_received(self, tips):
-    #     self.tips += tips
 
 #############################
 #############################
@@ -76,9 +65,10 @@ class Returning(Customers):
     def initial_budget(self):
         self.current_budget = randint(100, 300)
         return self.current_budget
+
     def set_initial_budget(self):
-        self.initial_budget = randint(100,300)
-        return self.initial_budget
+        self.current_budget = randint(100, 300)
+        return self.current_budget
 
     def bet(self, min_bet, current_budget):
         if current_budget >= min_bet:

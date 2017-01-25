@@ -32,13 +32,13 @@ dices = []
 casino_share = []
 n_sim = 1000
 for i in range(n_sim):
-    amounts3 = [randint(100, 500) for j in range(10)]
-    bets3 = [randint(2, 12) for k in range(10)]
-    result = table2.simulate_game(amounts3, bets3)
-    result_value_won.append(result[0])
+    amounts3 = [randint(100, 500) for j in range(10)] #10 customers with their amounts of bet
+    bets3 = [randint(2, 12) for k in range(10)]       #10 customers with their value on which they bet
+    result = table2.simulate_game(amounts3, bets3)    #table 2 ==>simulation with the minimum bet of the table =100
+    result_value_won.append(result[0])                #result[0] ==> same as "game_result"?
     result_profit.append(result[1])
     dices.append(table2.dices())
-    casino_share.append(result[1]/sum(amounts3))
+    casino_share.append(result[1]/sum(amounts3))      #list of shares per customer
 
 # Plotting some important results
 

@@ -58,12 +58,9 @@ class Casino(object):
             (self.c_tables + self.r_tables)[which_table[x]-1].customers.append(self.customers[x])
 
     def clear_tables(self):
-        """Clears the customer list o every table"""
+        """Clears the customer list of every table"""
         for x in (self.r_tables + self.c_tables):
             x.customers = []
-
-
-
 
 monte_carlo = Casino([], [], [], [], [])
 monte_carlo.buy_tables(10, 10)

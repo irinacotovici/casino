@@ -19,6 +19,8 @@ class Table(object):
 
     def call_bets(self):
         """Calls for bets from the players"""
+        # returns a list of minimum bets of each table along with the bets of customers, the length of this list equals
+        # to the length of customers
         [x.bet(self.mini, self.bet_range) for x in self.customers]
 
     def simulate_game(self, bets, bet_on):
@@ -30,12 +32,16 @@ class Table(object):
         Updates table's profit, croupier's commission, customers bets and budgets"""
         self.call_bets()
         bets = [x.bet for x in self.customers]  # Extracts a list of wages from the customers
-        bet_on = [random.randint(self.bet_range[0], self.bet_range[1]) for _ in self.customers]  # randomly chooses bets
+        bet_on = [random.randint(self.bet_range[0], self.bet_range[1]) for _ in self.customers]
+        #   bet on the right value?
+        #  randomly chooses bets
         game_result = self.simulate_game(bets, bet_on)
-        self.croupier.commission(game_result[1])  # Awards the croupier his commission
+        self.croupier.commission(game_result[1])   # game _result [1], means that the customer lost
+        #  Awards the croupier his commission
         self.profit += game_result[1] * 0.995  # After the croupier's commission
-        for x, y in zip(self.customers, game_result[0]):  # Awards each customer with the prize won
-            x.current_budget += y
+        for x, y in zip(self.customers, game_result[0]):   # game_result[0] means that the customer won
+            #  Awards each customer with the prize won
+            x.current_budget += y   # the  current budget of the customer is updated with the prize
 
 
 class Roulette(Table):
@@ -53,7 +59,7 @@ class Roulette(Table):
         if not any(wins):
             print("No player won")
         else:
-            players = [i for i, x in enumerate(wins) if x]
+            players = [i for i, x in enumerate(wins) if x] # True /False
             print("Players " + str(players) + " won")
         return wins
 
@@ -61,7 +67,7 @@ class Roulette(Table):
         """Simulates a round of roulette, gives the amounts won by each player and the casino's profit"""
         above_list = self.above_minimum(bets)
         wins = self.spin_the_wheel(bet_on)
-        value_won = [above * win * bet * 30 for win, bet, above in zip(wins, bets, above_list)]
+        value_won = [above * win * bet * 30 for win, bet, above in zip(wins, bets, above_list)]  #???
         profit = sum(bets) - sum(value_won)
         return [value_won, profit]
 
@@ -94,7 +100,7 @@ class Craps(Table):
 
     def calculate_prize(self, bet_on, expected_return=0.9):
         """Calculates the prize for a correct bet based on the sum of two dices and a expected return of 90%"""
-        prob = (6 - abs(bet_on - 7))/36
+        prob = (6 - abs(bet_on - 7))/36  #???
         prize = expected_return/prob
         return prize
 
