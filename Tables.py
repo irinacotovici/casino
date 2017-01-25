@@ -23,13 +23,14 @@ class Table(object):
 
     def simulate_game(self, bets, bet_on):
         """Placeholder for subclasses methods"""
-        return print("No game on this table")
+        print("No game on this table")
 
     def simulate_round(self):
-        """Only function needed to be called for a round"""
+        """Only function needed to be called for a round.
+        Updates table's profit, croupier's commission, customers bets and budgets"""
         self.call_bets()
-        bets = [x.bet for x in self.customers]
-        bet_on = [random.randint(self.bet_range[0], self.bet_range[1]) for _ in self.customers]
+        bets = [x.bet for x in self.customers]  # Extracts a list of wages from the customers
+        bet_on = [random.randint(self.bet_range[0], self.bet_range[1]) for _ in self.customers]  # randomly chooses bets
         game_result = self.simulate_game(bets, bet_on)
         self.croupier.commission(game_result[1])  # Awards the croupier his commission
         self.profit += game_result[1] * 0.995  # After the croupier's commission
