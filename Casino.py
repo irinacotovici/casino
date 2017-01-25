@@ -45,6 +45,12 @@ class Casino(object):
             self.cash -= self.promotion
         self.customers = list(returners + one_timers + bachelors)
 
+    def get_a_drink(self):
+        """Assign to every customer a barman randomly, and they buy drinks"""
+        which_barmen = [random.randint(1, len(self.barmen)) for _ in self.customers]
+        for x in range(len(self.customers) - 1):
+            self.customers[x].barman = self.barmen[which_barmen[x]]
+
     def fill_tables(self):
         """Assigns every customer to a table randomly"""
         which_table = [random.randint(1, len(self.c_tables + self.r_tables)) for _ in self.customers]
@@ -56,7 +62,6 @@ class Casino(object):
         for x in (self.r_tables + self.c_tables):
             x.customers = []
 
-    # def run_round(self):
 
 
 
